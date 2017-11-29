@@ -27,7 +27,7 @@ import java.util.Properties;
 @EnableJpaRepositories("org.studying.repository")
 public class ApplicationContextConfig {
     private String DRIVER_CLASS_NAME = "com.mysql.jdbc.Driver";
-    private String URL = "jdbc:mysql://localhost:3306/ecology";
+    private String URL = "jdbc:mysql://localhost:3306/ecology?autoReconnect=true&useSSL=false";
     private String USERNAME = "root";
     private String PASSWORD = "sXG>lcli*8w<";
 
