@@ -6,24 +6,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.studying.service.PlacesService;
+import org.studying.service.PointsService;
 
 @Controller
 public class TableController {
 
     @Autowired
-    private PlacesService placesService;
+    private PointsService pointsService;
 
     @RequestMapping(value = "/table")
     public String table(Model model){
-        model.addAttribute("list", placesService.getAllPlaces());
+        model.addAttribute("list", pointsService.getAllPlaces());
         return "table";
     }
 
     @RequestMapping(value = "/deleteMarker", method = RequestMethod.POST)
     public String deleteMarker(@RequestParam("delete") Long id, Model model){
-        placesService.delete(placesService.getById(id));
-        model.addAttribute("list", placesService.getAllPlaces());
+        pointsService.delete(pointsService.getById(id));
+        model.addAttribute("list", pointsService.getAllPlaces());
         return "table";
     }
 
@@ -33,8 +33,8 @@ public class TableController {
             @RequestParam("longitude") Double longitude,
             @RequestParam("latitude") Double latitude,
             Model model){
-        placesService.save(name, latitude, longitude);
-        model.addAttribute("list", placesService.getAllPlaces());
+        pointsService.save(name, latitude, longitude);
+        model.addAttribute("list", pointsService.getAllPlaces());
         return "table";
     }
 
@@ -45,8 +45,8 @@ public class TableController {
             @RequestParam("longitude") Double longitude,
             @RequestParam("latitude") Double latitude,
             Model model){
-        placesService.save(id, name, latitude, longitude);
-        model.addAttribute("list", placesService.getAllPlaces());
+        pointsService.save(id, name, latitude, longitude);
+        model.addAttribute("list", pointsService.getAllPlaces());
         return "table";
     }
 

@@ -8,20 +8,20 @@ SET SESSION collation_connection = 'utf8_general_ci';
 -- -----------------------------------------------------
 -- Schema ecology
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `ecology` ;
+DROP SCHEMA IF EXISTS `ecomonitoring` ;
 
 -- -----------------------------------------------------
 -- Schema ecology
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `ecology` DEFAULT CHARACTER SET utf8 ;
-USE `ecology` ;
+CREATE SCHEMA IF NOT EXISTS `ecomonitoring` DEFAULT CHARACTER SET utf8 ;
+USE `ecomonitoring` ;
 
 -- -----------------------------------------------------
 -- Table `ecology`.`places`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `ecology`.`places` ;
+DROP TABLE IF EXISTS `ecomonitoring`.`points` ;
 
-CREATE TABLE IF NOT EXISTS `ecology`.`places` (
+CREATE TABLE IF NOT EXISTS `ecomonitoring`.`points` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `longitude` DOUBLE NULL,

@@ -75,9 +75,9 @@
 
                     </div>
                       <form name="createMarker" action="createMarker" method="POST" style="border: 1px solid #ccc; padding: 10px; width: 250px;">
-                        NAME      : <input type="text" name="name"> <br>
-                        LONGITUDE : <input type="number" step="any" name="longitude"> <br>
-                        LATITUDE  : <input type="number" step="any" name="latitude"> <br>
+                        NAME      : <br><input type="text" name="name"> <br>
+                        LONGITUDE : <br><input type="number" step="any" name="longitude"> <br>
+                        LATITUDE  : <br><input type="number" step="any" name="latitude"> <br><br>
                         <input type="submit" value="CREATE">
                     </form>
                 </div>
@@ -91,7 +91,7 @@
 
 
                     <form name="deleteMarker" action="deleteMarker" method="POST" style="border: 1px solid #ccc; padding: 10px; width: 250px;">
-                        ID : <input type="number" name="delete"> <br>
+                        ID : <br><input type="number" name="delete"> <br><br>
                         <input type="submit" value="DELETE">
                     </form>
 
@@ -107,10 +107,10 @@
 
                     </div>
                       <form name="updateMarker" action="updateMarker" method="POST" style="border: 1px solid #ccc; padding: 10px; width: 250px;">
-                          ID : <input type="number" name="id"> <br>
-                          NAME      : <input type="text" name="name"> <br>
-                          LONGITUDE : <input type="number" step="any" name="longitude"> <br>
-                          LATITUDE  : <input type="number" step="any" name="latitude"> <br>
+                          ID : <br><input type="number" name="id"> <br>
+                          NAME      : <br><input type="text" name="name"> <br>
+                          LONGITUDE : <br><input type="number" step="any" name="longitude"> <br>
+                          LATITUDE  : <br><input type="number" step="any" name="latitude"> <br><br>
                           <input type="submit" value="UPDATE">
                       </form>
 
@@ -132,11 +132,11 @@
 <br>
 
 
-
-
 <!-- Bootstrap core JavaScript -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../resources/vendor/jquery/jquery.min.js"></script>
+<script src="../../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
 
 </body>
 </html>
