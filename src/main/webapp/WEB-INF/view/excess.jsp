@@ -1,5 +1,14 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: nadezhdavlasenko
+  Date: 13.12.2017
+  Time: 16:20
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <style type="text/css">
     <%@include file="../../resources/css/landing-page.css"%>
 </style>
@@ -11,12 +20,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Table</title>
-
-    <!-- Bootstrap core CSS -->
-    <%--<link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">--%>
-    <%--<script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>--%>
-    <%--<script src="<c:url value="/resources/js/main.js" />"></script>--%>
+    <title>Excess</title>
 
     <link href="<c:url value="/resources/vendor/bootstrap/css/bootstrap.min.css"/>" rel="stylesheet">
 
@@ -28,40 +32,41 @@
     <!-- Custom styles for this template -->
     <link href="<c:url value="/resources/css/landing-page.min.css"/>" rel="stylesheet">
 
-
-    <%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--%>
-    <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>--%>
-    <%--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--%>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script></head>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
 <body>
-
-
 
 <br>
 <div class="container">
-<table style="border: 1px solid #ccc; padding: 10px;" class="table table-hover" >
+    <table style="border: 1px solid #ccc; padding: 10px;" class="table table-hover" >
     <tr>
-        <td>ID</td>
-        <td>NAME</td>
-        <td>LONGITUDE</td>
-        <td>LATITUDE</td>
+        <td>Компанія</td>
+        <td>Забруднювач</td>
+        <td>Об'єм викидів(г/год(</td>
+        <td>Величина масової витрати (г/год)</td>
+        <td>Гранично допустимі викиди (мг/м3)</td>
+        <td>Клас речовини</td>
+        <td>Відсоток перебільшення</td>
     </tr>
     <c:forEach items="${list}" var="list">
         <tr>
-            <td>${list.id}</td>
-            <td>${list.name}</td>
-            <td>${list.longitude}</td>
-            <td>${list.latitude}</td>
+            <td>${list.nameOfPlace}</td>
+            <td>${list.nameOfPollutant}</td>
+            <td>${list.volume}</td>
+            <td>${list.massFlow}</td>
+            <td>${list.boundaryTolerance}</td>
+            <td>${list.classOfPollutant}</td>
+            <td>${list.percent}%</td>
         </tr>
     </c:forEach>
 </table>
+
 </div>
 
-<br>
-<br>
-<br>
+
 
 <!-- Icons Grid -->
 <section class="features-icons bg-light text-center">
@@ -74,7 +79,7 @@
                         <i class="icon-layers m-auto text-primary"></i>
 
                     </div>
-                      <form name="table/createMarker" action="table/createMarker" method="POST" style="border: 1px solid #ccc; padding: 10px; width: 250px;">
+                    <form name="createMarker" action="createMarker" method="POST" style="border: 1px solid #ccc; padding: 10px; width: 250px;">
                         NAME      : <br><input type="text" name="name"> <br>
                         LONGITUDE : <br><input type="number" step="any" name="longitude"> <br>
                         LATITUDE  : <br><input type="number" step="any" name="latitude"> <br><br>
@@ -106,13 +111,13 @@
                         <i class="icon-screen-desktop m-auto text-primary"></i>
 
                     </div>
-                      <form name="updateMarker" action="updateMarker" method="POST" style="border: 1px solid #ccc; padding: 10px; width: 250px;">
-                          ID : <br><input type="number" name="id"> <br>
-                          NAME      : <br><input type="text" name="name"> <br>
-                          LONGITUDE : <br><input type="number" step="any" name="longitude"> <br>
-                          LATITUDE  : <br><input type="number" step="any" name="latitude"> <br><br>
-                          <input type="submit" value="UPDATE">
-                      </form>
+                    <form name="updateMarker" action="updateMarker" method="POST" style="border: 1px solid #ccc; padding: 10px; width: 250px;">
+                        ID : <br><input type="number" name="id"> <br>
+                        NAME      : <br><input type="text" name="name"> <br>
+                        LONGITUDE : <br><input type="number" step="any" name="longitude"> <br>
+                        LATITUDE  : <br><input type="number" step="any" name="latitude"> <br><br>
+                        <input type="submit" value="UPDATE">
+                    </form>
 
                 </div>
             </div>
@@ -135,6 +140,7 @@
 <!-- Bootstrap core JavaScript -->
 <script src="../../resources/vendor/jquery/jquery.min.js"></script>
 <script src="../../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 
 
 

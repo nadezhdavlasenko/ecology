@@ -28,7 +28,7 @@ public class TableController {
         return "table";
     }
 
-    @RequestMapping(value = "/createMarker", method = RequestMethod.POST)
+    @RequestMapping(value = "/table/createMarker", method = RequestMethod.POST)
     public String createMarker(
             @RequestParam("name") String name,
             @RequestParam("longitude") Double longitude,

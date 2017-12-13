@@ -6,6 +6,7 @@ import org.studying.entity.Points;
 import org.studying.repository.PointsRepository;
 import org.studying.service.PointsService;
 
+import javax.persistence.Column;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +41,7 @@ public class PointsServiceImpl implements PointsService {
         return save(place);
     }
 
+    @Override
     public Points save(Long id, String name, Double latitude, Double longitude) {
         Points place = new Points();
         place.setId(id);
