@@ -61,7 +61,7 @@
         function initialize(){
             var mapOptions={
                 zoom: 7,
-                center: new google.maps.LatLng(51,31), // centre de la carte
+                center: new google.maps.LatLng(47,35), // centre de la carte
                 mapTypeId: google.maps.MapTypeId.ROADMAP, // ROADMAP, SATELLITE, HYBRID, TERRAIN
             };
 

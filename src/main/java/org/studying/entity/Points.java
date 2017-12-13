@@ -23,4 +23,6 @@ public class Points {
     @Column(name = "longitude")
     private Double longitude;
 
+   // private List<Vybros> vybrosList;
+
 }
