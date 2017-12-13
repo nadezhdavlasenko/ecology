@@ -22,7 +22,7 @@ public class PollutingFacility {
     public BoundaryTolerance boundaryTolerance;
 
     @Column(name = "volume")
-    private String volume;
+    private Double volume;
 
     @Column(name = "funds")
     private Double funds;
