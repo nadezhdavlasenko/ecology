@@ -8,6 +8,7 @@ public class PollutingFacilityData {
 
 
 
+        private Long id;
         private String nameOfPlace;
         private String nameOfPollutant;
         private Double volume;

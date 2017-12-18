@@ -3,6 +3,8 @@ package org.studying.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.studying.dto.PollutingFacilityData;
+import org.studying.entity.BoundaryTolerance;
+import org.studying.entity.Points;
 import org.studying.entity.PollutingFacility;
 import org.studying.repository.PollutingFacilityRepository;
 import org.studying.service.PollutingFacilityService;
@@ -17,7 +19,7 @@ public class PollutingFacilityServiceImpl implements PollutingFacilityService{
     private PollutingFacilityRepository pollutingFacilityRepository;
 
     @Override
-    public List<PollutingFacilityData> getOnlyDangerous() {
+    public List<PollutingFacilityData> getDataForDangerousOnly() {
         List<PollutingFacility> pollutingFacilityList = new ArrayList<>();
         pollutingFacilityRepository.findAll().forEach(pollutingFacilityList::add);
 
@@ -25,10 +27,11 @@ public class PollutingFacilityServiceImpl implements PollutingFacilityService{
         for (PollutingFacility pollutingFacility : pollutingFacilityList) {
             if (pollutingFacility.boundaryTolerance.getMassFlow() <= pollutingFacility.getVolume()) {
                 PollutingFacilityData data = new PollutingFacilityData();
+                data.setId(pollutingFacility.getId());
                 data.setNameOfPlace(pollutingFacility.point.getName());
                 data.setNameOfPollutant(pollutingFacility.boundaryTolerance.getName());
                 data.setClassOfPollutant(pollutingFacility.boundaryTolerance.getClassOfPollutant());
-                data.setVolume(pollutingFacility.getVolume());
+                data.setVolume(pollutingFacility.getVolume()*1000000/(365*24));
                 data.setBoundaryTolerance(pollutingFacility.boundaryTolerance.getBoundaryTolerance());
                 data.setMassFlow(pollutingFacility.boundaryTolerance.getMassFlow());
                 data.setPercent(getPercentFromEmission(pollutingFacility));
@@ -40,8 +43,22 @@ public class PollutingFacilityServiceImpl implements PollutingFacilityService{
         return resultList;
     }
 
+    @Override
+    public List<PollutingFacility> getDangerousOnly() {
+        List<PollutingFacility> pollutingFacilityList = new ArrayList<>();
+        pollutingFacilityRepository.findAll().forEach(pollutingFacilityList::add);
+
+        List<PollutingFacility> resultList = new ArrayList<>();
+        for (PollutingFacility pollutingFacility : pollutingFacilityList) {
+            if (pollutingFacility.boundaryTolerance.getMassFlow() <= pollutingFacility.getVolume()) {
+                resultList.add(pollutingFacility);
+            }
+        }
+        return resultList;
+    }
+
     private double getPercentFromEmission(PollutingFacility pollutingFacility) {
-        return (int) (pollutingFacility.getVolume() / pollutingFacility.boundaryTolerance.getMassFlow() * 100);
+        return (int) ((((pollutingFacility.getVolume()/365)/24)*1000000) / pollutingFacility.boundaryTolerance.getMassFlow() * 100);
     }
 
     @Override
@@ -62,12 +79,22 @@ public class PollutingFacilityServiceImpl implements PollutingFacilityService{
 //    private Double percent;
 //    private String classOfPollutant;
     @Override
-    public PollutingFacility save(String nameOfPlace, String nameOfPollutant, Double volume, Double massFlow,
+    public PollutingFacility save(String nameOfPlace, Double latitude, Double longitude, String nameOfPollutant, Double volume, Double massFlow,
                                   Double boundaryTolerance, String classOfPollutan) {
+
         PollutingFacility pollutingFacility = new PollutingFacility();
+
+        Points point = new Points();
+        pollutingFacility.setPoint(point);
+
+
+        pollutingFacility.setBoundaryTolerance(new BoundaryTolerance());
+
         pollutingFacility.point.setName(nameOfPlace);
+        pollutingFacility.point.setLatitude(latitude);
+        pollutingFacility.point.setLongitude(longitude);
         pollutingFacility.boundaryTolerance.setName(nameOfPollutant);
-        pollutingFacility.setVolume(volume);
+        pollutingFacility.setVolume(((volume/365)/24)*1000000);
         pollutingFacility.boundaryTolerance.setMassFlow(massFlow);
         pollutingFacility.boundaryTolerance.setBoundaryTolerance(boundaryTolerance);
         pollutingFacility.boundaryTolerance.setClassOfPollutant(classOfPollutan);
@@ -75,13 +102,20 @@ public class PollutingFacilityServiceImpl implements PollutingFacilityService{
     }
 
     @Override
-    public PollutingFacility save(Long id, String nameOfPlace, String nameOfPollutant, Double volume, Double massFlow,
+    public PollutingFacility save(Long id, String nameOfPlace, Double latitude, Double longitude, String nameOfPollutant, Double volume, Double massFlow,
                                   Double boundaryTolerance, String classOfPollutan) {
         PollutingFacility pollutingFacility = new PollutingFacility();
+
+        pollutingFacility.setPoint(new Points());
+
+        pollutingFacility.setBoundaryTolerance(new BoundaryTolerance());
+
         pollutingFacility.setId(id);
         pollutingFacility.point.setName(nameOfPlace);
+        pollutingFacility.point.setLatitude(latitude);
+        pollutingFacility.point.setLongitude(longitude);
         pollutingFacility.boundaryTolerance.setName(nameOfPollutant);
-        pollutingFacility.setVolume(volume);
+        pollutingFacility.setVolume(((volume/365)/24)*1000000);
         pollutingFacility.boundaryTolerance.setMassFlow(massFlow);
         pollutingFacility.boundaryTolerance.setBoundaryTolerance(boundaryTolerance);
         pollutingFacility.boundaryTolerance.setClassOfPollutant(classOfPollutan);
@@ -92,5 +126,10 @@ public class PollutingFacilityServiceImpl implements PollutingFacilityService{
     @Override
     public void delete(PollutingFacility pollutingFacility) {
         pollutingFacilityRepository.delete(pollutingFacility);
+    }
+
+    @Override
+    public List<PollutingFacility> findAll() {
+        return (List<PollutingFacility>) pollutingFacilityRepository.findAll();
     }
 }

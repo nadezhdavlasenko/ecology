@@ -90,7 +90,7 @@
                     </div>
 
 
-                    <form name="deleteMarker" action="deleteMarker" method="POST" style="border: 1px solid #ccc; padding: 10px; width: 250px;">
+                    <form name="table/deleteMarker" action="table/deleteMarker" method="POST" style="border: 1px solid #ccc; padding: 10px; width: 250px;">
                         ID : <br><input type="number" name="delete"> <br><br>
                         <input type="submit" value="DELETE">
                     </form>
@@ -106,7 +106,7 @@
                         <i class="icon-screen-desktop m-auto text-primary"></i>
 
                     </div>
-                      <form name="updateMarker" action="updateMarker" method="POST" style="border: 1px solid #ccc; padding: 10px; width: 250px;">
+                      <form name="table/updateMarker" action="table/updateMarker" method="POST" style="border: 1px solid #ccc; padding: 10px; width: 250px;">
                           ID : <br><input type="number" name="id"> <br>
                           NAME      : <br><input type="text" name="name"> <br>
                           LONGITUDE : <br><input type="number" step="any" name="longitude"> <br>

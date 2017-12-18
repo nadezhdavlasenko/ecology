@@ -43,6 +43,7 @@
 <div class="container">
     <table style="border: 1px solid #ccc; padding: 10px;" class="table table-hover" >
     <tr>
+        <td>ID</td>
         <td>Компанія</td>
         <td>Забруднювач</td>
         <td>Об'єм викидів(г/год(</td>
@@ -53,6 +54,7 @@
     </tr>
     <c:forEach items="${list}" var="list">
         <tr>
+            <td>${list.id}</td>
             <td>${list.nameOfPlace}</td>
             <td>${list.nameOfPollutant}</td>
             <td>${list.volume}</td>
@@ -79,12 +81,30 @@
                         <i class="icon-layers m-auto text-primary"></i>
 
                     </div>
-                    <form name="createMarker" action="createMarker" method="POST" style="border: 1px solid #ccc; padding: 10px; width: 250px;">
-                        NAME      : <br><input type="text" name="name"> <br>
+
+                    <%--//    private String nameOfPlace;--%>
+                    <%--//    private String nameOfPollutant;--%>
+                    <%--//    private Double volume;--%>
+                    <%--//    private Double massFlow;--%>
+                    <%--//    private Double boundaryTolerance;--%>
+                    <%--//    private Double percent;--%>
+                    <%--//    private String classOfPollutant;--%>
+                    <form target="transFrame" name="excess/createMarker" action="/excess/createMarker" method="POST" style="border: 1px solid #ccc; padding: 10px; width: 250px;">
+
+                        Компанія      : <br><input type="text" name="nameOfPlace"> <br>
                         LONGITUDE : <br><input type="number" step="any" name="longitude"> <br>
-                        LATITUDE  : <br><input type="number" step="any" name="latitude"> <br><br>
+                        LATITUDE  : <br><input type="number" step="any" name="latitude"> <br>
+                        Забруднювач : <br><input type="text" name="nameOfPollutant"> <br>
+                        Об'єм викидів  : <br><input type="number" step="any" name="volume"> <br>
+                        Величина масової витрати  : <br><input type="number" step="any" name="massFlow"> <br>
+                        Гранично допустимі викиди  : <br><input type="number" step="any" name="boundaryTolerance"> <br>
+                        Клас речовини  : <br><input type="text" step="any" name="classOfPollutant"> <br>
+                        <br>
+
+
                         <input type="submit" value="CREATE">
                     </form>
+                    <iframe style="" name="transFrame" id="transFrame" width="0", height="0", frameborder="0"></iframe>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -95,7 +115,7 @@
                     </div>
 
 
-                    <form name="deleteMarker" action="deleteMarker" method="POST" style="border: 1px solid #ccc; padding: 10px; width: 250px;">
+                    <form target="transFrame" name="excess/deleteMarker" action="/excess/deleteMarker" method="POST" onsubmit="window.location.reload();" style="border: 1px solid #ccc; padding: 10px; width: 250px;">
                         ID : <br><input type="number" name="delete"> <br><br>
                         <input type="submit" value="DELETE">
                     </form>
@@ -111,11 +131,16 @@
                         <i class="icon-screen-desktop m-auto text-primary"></i>
 
                     </div>
-                    <form name="updateMarker" action="updateMarker" method="POST" style="border: 1px solid #ccc; padding: 10px; width: 250px;">
+                    <form target="transFrame" name="excess/updateMarker" action="/excess/updateMarker" method="POST" style="border: 1px solid #ccc; padding: 10px; width: 250px;">
                         ID : <br><input type="number" name="id"> <br>
-                        NAME      : <br><input type="text" name="name"> <br>
                         LONGITUDE : <br><input type="number" step="any" name="longitude"> <br>
-                        LATITUDE  : <br><input type="number" step="any" name="latitude"> <br><br>
+                        LATITUDE  : <br><input type="number" step="any" name="latitude"> <br>
+                        Компанія      : <br><input type="text" name="nameOfPlace"> <br>
+                        Забруднювач : <br><input type="text" name="nameOfPollutant"> <br>
+                        Об'єм викидів  : <br><input type="number" step="any" name="volume"> <br>
+                        Величина масової витрати  : <br><input type="number" step="any" name="massFlow"> <br>
+                        Гранично допустимі викиди  : <br><input type="number" step="any" name="boundaryTolerance"> <br>
+                        Клас речовини  : <br><input type="text" step="any" name="classOfPollutant"> <br><br>
                         <input type="submit" value="UPDATE">
                     </form>
 

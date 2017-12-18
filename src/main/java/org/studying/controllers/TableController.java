@@ -21,7 +21,7 @@ public class TableController {
         return "table";
     }
 
-    @RequestMapping(value = "/deleteMarker", method = RequestMethod.POST)
+    @RequestMapping(value = "/table/deleteMarker", method = RequestMethod.POST)
     public String deleteMarker(@RequestParam("delete") Long id, Model model){
         pointsService.delete(pointsService.getById(id));
         model.addAttribute("list", pointsService.getAllPlaces());
@@ -39,7 +39,7 @@ public class TableController {
         return "table";
     }
 
-    @RequestMapping(value = "/updateMarker", method = RequestMethod.POST)
+    @RequestMapping(value = "/table/updateMarker", method = RequestMethod.POST)
     public String createMarker(
             @RequestParam("id") Long id,
             @RequestParam("name") String name,

@@ -54,7 +54,8 @@
             markers.push({
                 name: "${fn:escapeXml(markers.name)}",
                 latitude: <c:out value="${markers.latitude}"/>,
-                longitude: <c:out value="${markers.longitude}"/>
+                longitude: <c:out value="${markers.longitude}"/>,
+                dangerous: <c:out value="${markers.dangerous}"/>
             });
         </c:forEach>
 
@@ -68,10 +69,30 @@
             var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
             for (i = 0; i < markers.length; i++) {
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(markers[i].latitude, markers[i].longitude),
-                    map: map
-                });
+
+                var marker;
+                if (markers[i].dangerous === true) {
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(markers[i].latitude, markers[i].longitude),
+                        icon: {
+                            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                            strokeColor: "red",
+                            scale: 3
+                        },
+                        map: map
+                    });
+                } else {
+                    marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(markers[i].latitude, markers[i].longitude),
+                        icon: {
+                            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+                            strokeColor: "green",
+                            scale: 3
+                        },
+                        map: map
+                    });
+                }
+
 
                 var infowindow = new google.maps.InfoWindow();
                 infowindow.setContent(markers[i].name);
