@@ -15,6 +15,9 @@ public class PollutingFacilityData {
         private Double massFlow;
         private Double boundaryTolerance;
         private Double percent;
-        private String classOfPollutant;
+       // private String classOfPollutant;
+        private Double taxRate;
+        private Double AmountOfTax;
+
 
 }

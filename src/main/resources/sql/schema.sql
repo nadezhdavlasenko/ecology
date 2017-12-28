@@ -29,6 +29,19 @@ CREATE TABLE IF NOT EXISTS `ecomonitoring`.`points` (
   PRIMARY KEY (`id`))
   ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `ecomonitoring`.`taxRate`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ecomonitoring`.`taxRate` ;
+
+CREATE TABLE IF NOT EXISTS `ecomonitoring`.`taxRate` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `class` INT NOT NULL,
+  `taxRate` DOUBLE NULL,
+  PRIMARY KEY (`id`))
+  ENGINE = InnoDB;
+
 -- -----------------------------------------------------
 -- Table `ecomonitoring`.`boundaryTolerance`
 -- -----------------------------------------------------
@@ -38,10 +51,17 @@ CREATE TABLE IF NOT EXISTS `ecomonitoring`.`boundaryTolerance` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `massFlow` DOUBLE NULL,
-  `class` INT NOT NULL,
+  `taxRate_id` INT NOT NULL,
   `boundaryTolerance` DOUBLE NULL,
-  PRIMARY KEY (`id`))
-  ENGINE = InnoDB;
+  PRIMARY KEY (`id`),
+  INDEX `fk_boundaryTolerance_taxRate_idx` (`taxRate_id` ASC),
+  CONSTRAINT `fk_boundaryTolerance_taxRate`
+  FOREIGN KEY (`taxRate_id`)
+  REFERENCES `ecomonitoring`.`taxRate` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION)
+
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -60,12 +80,12 @@ CREATE TABLE IF NOT EXISTS `ecomonitoring`.`pollutingFacility` (
   INDEX `fk_pollutingFacility_boundaryTolerance1_idx` (`boundaryTolerance_id` ASC),
   CONSTRAINT `fk_pollutingFacility_points`
   FOREIGN KEY (`points_id`)
-  REFERENCES `ecology`.`points` (`id`)
+  REFERENCES `ecomonitoring`.`points` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_pollutingFacility_boundaryTolerance1`
   FOREIGN KEY (`boundaryTolerance_id`)
-  REFERENCES `ecology`.`boundaryTolerance` (`id`)
+  REFERENCES `ecomonitoring`.`boundaryTolerance` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

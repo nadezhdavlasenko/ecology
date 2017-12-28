@@ -30,11 +30,13 @@ public class PollutingFacilityServiceImpl implements PollutingFacilityService{
                 data.setId(pollutingFacility.getId());
                 data.setNameOfPlace(pollutingFacility.point.getName());
                 data.setNameOfPollutant(pollutingFacility.boundaryTolerance.getName());
-                data.setClassOfPollutant(pollutingFacility.boundaryTolerance.getClassOfPollutant());
+                //data.setClassOfPollutant(pollutingFacility.boundaryTolerance.getClassOfPollutant());
                 data.setVolume(pollutingFacility.getVolume()*1000000/(365*24));
                 data.setBoundaryTolerance(pollutingFacility.boundaryTolerance.getBoundaryTolerance());
                 data.setMassFlow(pollutingFacility.boundaryTolerance.getMassFlow());
                 data.setPercent(getPercentFromEmission(pollutingFacility));
+                data.setTaxRate(pollutingFacility.boundaryTolerance.getTaxRate().getTaxRate());
+                data.setAmountOfTax(getTaxes(pollutingFacility));
 
                 resultList.add(data);
             }
@@ -57,8 +59,22 @@ public class PollutingFacilityServiceImpl implements PollutingFacilityService{
         return resultList;
     }
 
+
     private double getPercentFromEmission(PollutingFacility pollutingFacility) {
         return (int) ((((pollutingFacility.getVolume()/365)/24)*1000000) / pollutingFacility.boundaryTolerance.getMassFlow() * 100);
+    }
+
+    private double getTaxes(PollutingFacility pollutingFacility) {
+
+        return pollutingFacility.getVolume() * pollutingFacility.getBoundaryTolerance().getTaxRate().getTaxRate();
+    }
+
+    double roundResult (double d, int precise)
+    {
+        precise = 10^precise;
+        d = d * precise;
+        int i = (int) Math.round(d);
+        return (double) i / precise;
     }
 
     @Override
@@ -97,7 +113,8 @@ public class PollutingFacilityServiceImpl implements PollutingFacilityService{
         pollutingFacility.setVolume(((volume/365)/24)*1000000);
         pollutingFacility.boundaryTolerance.setMassFlow(massFlow);
         pollutingFacility.boundaryTolerance.setBoundaryTolerance(boundaryTolerance);
-        pollutingFacility.boundaryTolerance.setClassOfPollutant(classOfPollutan);
+       // pollutingFacility.boundaryTolerance.getTaxRate().getTaxRate();
+      //  pollutingFacility.boundaryTolerance.setClassOfPollutant(classOfPollutan);
         return save(pollutingFacility);
     }
 
@@ -118,7 +135,7 @@ public class PollutingFacilityServiceImpl implements PollutingFacilityService{
         pollutingFacility.setVolume(((volume/365)/24)*1000000);
         pollutingFacility.boundaryTolerance.setMassFlow(massFlow);
         pollutingFacility.boundaryTolerance.setBoundaryTolerance(boundaryTolerance);
-        pollutingFacility.boundaryTolerance.setClassOfPollutant(classOfPollutan);
+      //  pollutingFacility.boundaryTolerance.setClassOfPollutant(classOfPollutan);
 
         return save(pollutingFacility);
     }

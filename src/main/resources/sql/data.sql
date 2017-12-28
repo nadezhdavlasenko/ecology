@@ -13,11 +13,19 @@ insert into ecomonitoring.points(name, longitude, latitude) values
     ('PJSC "Zaporozhye automobile plant »', 35.1610395, 47.8227299),
     ('PJSC "Zaporozhye iron ore plant »', 34.964201, 47.1724328);
 
-insert into ecomonitoring.boundaryTolerance(name, massFlow, boundaryTolerance, class) values
+insert into ecomonitoring.taxRate(class, taxRate) values
+    ('1', 14080.5),
+    ('2', 3224.65),
+    ('3', 480.47),
+    ('4', 111.26);
+
+insert into ecomonitoring.boundaryTolerance(name, massFlow, boundaryTolerance, taxRate_id) values
     ('Суспендовані тверді частинки', 500, 50, 2),
     ('Сполуки азоту', 5000, 500, 4),
     ('Діоксид та інші сполуки сірки', 300, 30, 3),
     ('Оксид вуглецю', 5000, 250, 4);
+
+
 
 insert into ecomonitoring.pollutingFacility(boundaryTolerance_id, volume, point_id) values
     (1, 5160, 1),

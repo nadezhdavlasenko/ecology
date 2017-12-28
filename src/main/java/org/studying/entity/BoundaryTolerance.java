@@ -30,8 +30,9 @@ public class BoundaryTolerance {
     private Double boundaryTolerance;
 
 
-    @Column(name = "class")
-    private String classOfPollutant;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    TaxRate taxRate;
 
 //    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "pollutants")
 //    public List<BoundaryTolerance> boundaryToleranceList;

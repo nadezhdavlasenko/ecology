@@ -49,8 +49,10 @@
         <td>Об'єм викидів(г/год(</td>
         <td>Величина масової витрати (г/год)</td>
         <td>Гранично допустимі викиди (мг/м3)</td>
-        <td>Клас речовини</td>
+        <%--<td>Клас речовини</td>--%>
         <td>Відсоток перебільшення</td>
+        <td>Ставки податку</td>
+        <td>Податок</td>
     </tr>
     <c:forEach items="${list}" var="list">
         <tr>
@@ -60,8 +62,10 @@
             <td>${list.volume}</td>
             <td>${list.massFlow}</td>
             <td>${list.boundaryTolerance}</td>
-            <td>${list.classOfPollutant}</td>
+            <%--<td>${list.classOfPollutant}</td>--%>
             <td>${list.percent}%</td>
+            <td>${list.taxRate}</td>
+            <td>${list.amountOfTax}</td>
         </tr>
     </c:forEach>
 </table>

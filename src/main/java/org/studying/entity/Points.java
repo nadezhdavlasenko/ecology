@@ -3,6 +3,7 @@ package org.studying.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -22,6 +23,9 @@ public class Points {
 
     @Column(name = "longitude")
     private Double longitude;
+
+//    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "points")
+//    public List<PollutingFacility> pollutingFacilityList;
 
    // private List<Vybros> vybrosList;
 
